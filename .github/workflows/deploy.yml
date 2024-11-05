@@ -1,0 +1,32 @@
+# .github/workflows/deploy.yml
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        run: echo "${{ pedrohenrique1004 }}" | docker login -u "${{ pedroszh }}" --password-stdin
+
+      - name: Publish Front-End Image
+        run: |
+          docker build -t mydockerhubusername/myapp-frontend ./frontend
+          docker push mydockerhubusername/myapp-frontend
+
+      - name: Publish Back-End Image
+        run: |
+          docker build -t mydockerhubusername/myapp-backend ./backend
+          docker push mydockerhubusername/myapp-backend
+
+      - name: Publish Database Image
+        run: |
+          docker build -t mydockerhubusername/myapp-database ./database
+          docker push mydockerhubusername/myapp-database

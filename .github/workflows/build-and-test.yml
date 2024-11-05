@@ -1,0 +1,39 @@
+# .github/workflows/build-and-test.yml
+name: Build and Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build Front-End Docker image
+        run: |
+          docker build -t myapp-frontend ./frontend
+
+      - name: Run Front-End Tests
+        run: |
+          docker run myapp-frontend npm test
+
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build Back-End Docker image
+        run: |
+          docker build -t myapp-backend ./backend
+
+      - name: Run Back-End Tests
+        run: |
+          docker run myapp-backend npm test

@@ -1,0 +1,11 @@
+# database/Dockerfile
+FROM mysql:8
+
+# Defina variáveis de ambiente para o banco de dados
+ENV MYSQL_ROOT_PASSWORD=rootpassword
+ENV MYSQL_DATABASE=mydatabase
+ENV MYSQL_USER=myuser
+ENV MYSQL_PASSWORD=mypassword
+
+# Expor a porta padrão do MySQL
+EXPOSE 3306

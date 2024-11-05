@@ -1,0 +1,14 @@
+# backend/Dockerfile
+FROM node:14
+
+WORKDIR /app
+
+# Instalar dependências
+COPY package.json package-lock.json ./
+RUN npm install
+
+COPY . .
+
+# Expor a porta 5000 para o servidor backend
+EXPOSE 5000
+CMD ["node", "index.js"]
